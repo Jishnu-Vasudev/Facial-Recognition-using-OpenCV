@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition using OpenCV</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Face Recognition</h1>
+        <p class="details">
+            Welcome to our Face Recognition System! 
+            This simple web app allows you to learn and recognize faces using OpenCV and MongoDB. 
+            Here's how you can use it:
+
+            <li class="details"><b>Learn Image:</b> Upload an image to teach the system a new face.</li>
+            <li class="details"><b>Recognize Image:</b> Upload an image to identify the person in it.</li>
+        </p>
+        
+        <div class="box">
+            <h1>Learn Image</h1>
+            <img src="../static/icons/Icon 1.png" alt="">
+            <form action="/learn" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".jpg, .jpeg, .png">
+                <button type="submit">Learn</button>
+            </form>
+            <h1>Recognise Image</h1>
+            <img src="../static/icons/Icon 2.png" alt="">
+            <form action="/recognise" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".jpg, .jpeg, .png">
+                <button type="submit">Recognise</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
