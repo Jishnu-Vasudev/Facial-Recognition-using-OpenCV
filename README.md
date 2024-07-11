@@ -13,7 +13,7 @@ An OpenCV project with HTML, CSS frontend and fastapi for server side scripting 
 - When a face is learned these landmarks are extracted and is fed into a MongoDB database.
 - During recognition the landmarks of the given image is compared to each of the landmarks already present in the MongoDB database. The result is hence fetched and displayed.
 ## Run the project
-- Use the following command to execute the application:
+- Use the following command on shell opened in the directory that contains main.py (parent directory), to execute the application:
 ```
 uvicorn main:app
 ```
