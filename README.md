@@ -17,7 +17,8 @@ An OpenCV project with HTML, CSS frontend and fastapi for server side scripting 
 ```
 uvicorn main:app
 ```
-The packages that should be installed are included in requirements.txt. To install all these packages in one stretch use the following command in a shell which is opened in a directory where requirements.txt exist :
+- The run.bat file can be used for widows os to execute the files locally in one stretch.
+- The packages that should be installed are included in requirements.txt. To install all these packages in one stretch use the following command in a shell which is opened in a directory where requirements.txt exist :
 ```
 pip install -r requirements.txt
 ```
