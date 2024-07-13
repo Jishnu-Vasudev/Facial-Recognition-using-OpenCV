@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import mongoengine as monge
 import base64
+import logging
 
 app = FastAPI()
 monge.connect(host="mongodb://localhost:27017/Face_Information", db="Face_Information")
@@ -16,6 +17,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Set up Jinja2Templates instance with templates directory
 templates = Jinja2Templates(directory="templates")
+
+# Set up logging
+# logging.basicConfig(level=logging.DEBUG)
 
 class Person(monge.Document):
     name = monge.StringField()
@@ -38,14 +42,18 @@ async def recoimage(request: Request, file: UploadFile = File(...)):
     encode_img = fr.face_encodings(img)[0]
 
     recognized_name = None
-    for person in Person.objects():
-        if fr.compare_faces([person.encode], encode_img):
+    data = Person.objects()
+
+    # logging.debug("Data from DB: %s", list(data))  # Debugging statement
+
+    for person in data:
+        match_results = fr.compare_faces([person.encode], encode_img)
+        # logging.debug("Comparing with %s, result: %s", person.name, match_results)  # Debugging statement
+        if any(match_results):
             recognized_name = person.name
             # Draw rectangle around the face
             top, right, bottom, left = face_locations[0]  # Assuming only one face is recognized
             cv2.rectangle(img, (left, top), (right, bottom), (255, 0, 255), 2)
-            # Add text with recognized name
-            cv2.putText(img, recognized_name, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 2)
             break
 
     if recognized_name is None:
